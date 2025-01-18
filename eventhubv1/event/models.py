@@ -7,3 +7,6 @@ class Event(models.Model):
     image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=50, blank=False)
+
+    def __str__(self):
+        return self.name
