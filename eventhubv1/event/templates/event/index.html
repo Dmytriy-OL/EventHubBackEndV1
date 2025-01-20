@@ -1,22 +1,40 @@
 {% extends 'event/base.html' %}
 
-{% block content%}
-<h1>{{ title }}</h1>
+{% block content %}
+<div class="container">
+    <!-- Sidebar Menu -->
+    <aside class="sidebar">
+        <ul>
+            {% if selected_category == 0 %}
+                <li><a href="#">All Categories</a></li>
+            {% else %}
+                <li><a href="{% url 'home' %}">All Categories</a></li>
+            {% endif%}
 
-<ul>
-    {% for p in post %}
-    <li style="position: relative; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
-        <h2>{{ p.name }}</h2>
-        <p><strong>Author ID:</strong> {{ p.authorId }}</p>
-        <p><strong>Date:</strong> {{ p.data }}</p>
-        <p><strong>Description:</strong> {{ p.description|truncatechars:20 }}</p>
-        <p><strong>Category:</strong> {{ p.category }}</p>
-        <a href="{{ p.get_absolute_url }}">
-            <div class="button_read_more">Read more</div>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+            {% for cat in category %}
+            <li><a href="{{ cat.get_absolute_url }}">{{cat}}</a></li>
+            {%endfor%}
 
+        </ul>
+    </aside>
 
+    <!-- Main Content -->
+    <main class="content">
+        <h1>{{ title }}</h1>
+        <ul>
+            {% for p in post %}
+            <li style="position: relative; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+                <h2>{{ p.name }}</h2>
+                <p><strong>Author ID:</strong> {{ p.authorId }}</p>
+                <p><strong>Date:</strong> {{ p.data }}</p>
+                <p><strong>Description:</strong> {{ p.description|truncatechars:20 }}</p>
+                <p><strong>Category:</strong> {{ p.category }}</p>
+                <a href="{{ p.get_absolute_url }}">
+                    <div class="button_read_more">Read more</div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+</div>
 {% endblock %}

@@ -11,15 +11,36 @@ menu = [{'name': 'Add new Event', 'url_name': 'add_new_event'},
 
 def index(request):
     posts = Event.objects.all()
-
-    print(posts)
-    # print(menu[0].values())
+    category = EventCategory.objects.all()
 
     context = {
         'menu': menu,
         'post': posts,
-        'title': 'EventHub Main Page'
+        'category': category,
+        'title': 'EventHub Main Page',
+        'selected_category': 0
+
     }
+
+    return render(request, 'event/index.html', context=context)
+
+
+def show_category(request, category_id):
+    posts = Event.objects.filter(category_id=category_id)
+    category = EventCategory.objects.all()
+
+    context = {
+        'menu': menu,
+        'post': posts,
+        'category': category,
+        'title': category[category_id - 1],
+        'selected_category': category_id
+
+    }
+    # category = EventCategory.objects.all()
+    # print(category)
+    # return HttpResponse(f"Category which id is {category_id}"
+    #                     f"Category name is {category[category_id - 1]}")
 
     return render(request, 'event/index.html', context=context)
 
@@ -43,8 +64,10 @@ def add_new_event(request):
 def feedback(request):
     return HttpResponse("<h1>Feedback</h1>")
 
+
 def show_event(request, event_id):
     return HttpResponse(f"Event which id is {event_id}")
+
 
 # def eventss(request):
 #     return HttpResponse("<h1>event 1</h1><h1>event 2</h1>")
