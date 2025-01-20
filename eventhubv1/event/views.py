@@ -3,18 +3,48 @@ from django.shortcuts import render, redirect
 
 from .models import *
 
-menu = ["Main Page", "Add new Event", "Feedback", "Personal Page"]
+menu = [{'name': 'Add new Event', 'url_name': 'add_new_event'},
+        {'name': 'Feedback', 'url_name': 'feedback'},
+        {'name': 'Personal Page', 'url_name': 'personal_page'},
+        {'name': 'About Page', 'url_name': 'about'}]
 
 
 def index(request):
     posts = Event.objects.all()
+
     print(posts)
-    return render(request, 'event/index.html', { 'menu': menu, 'post': posts, 'title': 'EventHub Main Page'})
+    # print(menu[0].values())
+
+    context = {
+        'menu': menu,
+        'post': posts,
+        'title': 'EventHub Main Page'
+    }
+
+    return render(request, 'event/index.html', context=context)
 
 
 def about(request):
-    return render(request, 'event/about.html', {'menu': menu, 'title': 'EventHub About Page'})
+    context = {
+        'menu': menu,
+        'title': 'EventHub About Page'
+    }
+    return render(request, 'event/about.html', context=context)
 
+
+def personal_page(request):
+    return HttpResponse("<h1>Personal Page</h1>")
+
+
+def add_new_event(request):
+    return HttpResponse("<h1>Add new Event</h1>")
+
+
+def feedback(request):
+    return HttpResponse("<h1>Feedback</h1>")
+
+def show_event(request, event_id):
+    return HttpResponse(f"Event which id is {event_id}")
 
 # def eventss(request):
 #     return HttpResponse("<h1>event 1</h1><h1>event 2</h1>")
