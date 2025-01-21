@@ -29,6 +29,9 @@ def show_category(request, category_id):
     posts = Event.objects.filter(category_id=category_id)
     category = EventCategory.objects.all()
 
+    if category_id > len(category):
+        raise Http404
+
     context = {
         'menu': menu,
         'post': posts,
@@ -37,11 +40,11 @@ def show_category(request, category_id):
         'selected_category': category_id
 
     }
+
     # category = EventCategory.objects.all()
     # print(category)
     # return HttpResponse(f"Category which id is {category_id}"
     #                     f"Category name is {category[category_id - 1]}")
-
     return render(request, 'event/index.html', context=context)
 
 
@@ -84,4 +87,4 @@ def show_event(request, event_id):
 
 
 def pageNotFound(request, exception):
-    return HttpResponseNotFound("<h1>Page Not Foundddd</h1>")
+    return HttpResponseNotFound("<h1>Page Not Found</h1><h2>Please try again</h2>")
