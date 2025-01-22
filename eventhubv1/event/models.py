@@ -16,6 +16,11 @@ class Event(models.Model):
     def get_absolute_url(self):
         return reverse('show_event', kwargs={'event_id': self.pk})
 
+    class Meta:
+        verbose_name = 'Event'
+        verbose_name_plural = 'All Events'
+        ordering = ['data', 'name']
+
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=50, db_index=True)
@@ -25,3 +30,8 @@ class EventCategory(models.Model):
 
     def get_absolute_url(self):
         return reverse('show_category', kwargs={'category_id': self.pk})
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+        # ordering = ['-name']

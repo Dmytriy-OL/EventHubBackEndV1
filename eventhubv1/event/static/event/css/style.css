@@ -96,8 +96,9 @@ button {
     transition: background-color 0.2s ease;
 }
 
-button:hover {
-    background-color: #003d80;
+.button_read_more:hover {
+    transform: scale(1.02);
+    background-color: #005bc0;
 }
 
 
@@ -109,6 +110,7 @@ button:hover {
     color: white;
     padding: 8px 12px;
     text-decoration: none;
+    transition: background-color 0.2s ease;
     border-radius: 4px;
 }
 
@@ -168,4 +170,5 @@ button:hover {
     text-decoration: none;
     font-weight: bold;
     display: block;
+    font-size: 1.1rem;
 }
