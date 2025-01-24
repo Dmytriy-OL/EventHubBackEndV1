@@ -1,25 +1,25 @@
 {% load static %}
+{% load event_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% if title %}
     <title>{{ title }}</title>
+    {% else %}
+    {% get_categories as categories%}
+
+    {% for category in categories%}
+        {% if forloop.counter == selected_category%}
+                <title>{{ category.name }}</title>
+        {% endif %}
+    {% endfor %}
+    {% endif%}
     <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-<!--Main Menu-->
-{% block mainmenu %}
-<nav class="navbar">
-    <a href="{% url 'home' %}">
-        <div class="logo">EventHub</div>
-    </a>
-    <ul class="menu">
-        {% for m in menu %}
-        <li><a href="{% url m.url_name %}">{{ m.name }}</a></li>
-        {% endfor %}
-    </ul>
-</nav>
-{% endblock mainmenu%}
+
+{% show_menu %}
 
 
 <!--Content Block-->

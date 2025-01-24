@@ -1,0 +1,9 @@
+{% for cat in categories %}
+
+{% if selected_category == cat.pk %}
+<li class="selected_category">{{cat}}</li>
+{% else %}
+<li><a href="{{ cat.get_absolute_url }}">{{cat}}</a></li>
+{% endif %}
+
+{%endfor%}

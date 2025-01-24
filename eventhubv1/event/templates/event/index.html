@@ -1,25 +1,20 @@
 {% extends 'event/base.html' %}
+{% load event_tags %}
 
 {% block content %}
 <div class="container">
     <!-- Sidebar Menu -->
     <aside class="sidebar">
         <ul>
+<!--            {% get_categories filter=1 as categories %}-->
+            {% get_categories as categories %}
             {% if selected_category == 0 %}
             <li class="selected_category">All Categories</li>
             {% else %}
             <li><a href="{% url 'home' %}">All Categories</a></li>
             {% endif%}
 
-            {% for cat in category %}
-
-            {% if selected_category == cat.pk %}
-            <li class="selected_category">{{cat}}</li>
-            {% else %}
-            <li><a href="{{ cat.get_absolute_url }}">{{cat}}</a></li>
-            {% endif %}
-
-            {%endfor%}
+            {% show_categories selected_category=selected_category%}
 
         </ul>
     </aside>
@@ -28,14 +23,17 @@
     <main class="content">
         <h1>{{ title }}</h1>
         <ul>
-            {% for p in post %}
-            <li style="position: relative; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
-                <h2>{{ p.name }}</h2>
-                <p><strong>Author ID:</strong> {{ p.authorId }}</p>
-                <p><strong>Date:</strong> {{ p.data }}</p>
-                <p><strong>Description:</strong> {{ p.description|truncatechars:20 }}</p>
-                <p><strong>Category:</strong> {{ p.category }}</p>
-                <a href="{{ p.get_absolute_url }}">
+            {% for ev in events %}
+            <li class="events_li">
+                {% if ev.image%}
+                <img src="{{ ev.image.url }}" alt="{{ ev.name }}" >
+                {% endif %}
+                <h2>{{ ev.name }}</h2>
+                <p><strong>Author ID:</strong> {{ ev.authorId }}</p>
+                <p><strong>Date:</strong> {{ ev.data }}</p>
+                <p><strong>Description:</strong> {{ ev.description|truncatechars:20 }}</p>
+                <p><strong>Category:</strong> {{ ev.category }}</p>
+                <a href="{{ ev.get_absolute_url }}">
                     <div class="button_read_more">Read more</div>
                 </a>
             </li>
