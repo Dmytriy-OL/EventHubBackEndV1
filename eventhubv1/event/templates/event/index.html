@@ -3,21 +3,12 @@
 
 {% block content %}
 <div class="container">
-    <!-- Sidebar Menu -->
-    <aside class="sidebar">
-        <ul>
-<!--            {% get_categories filter=1 as categories %}-->
-            {% get_categories as categories %}
-            {% if selected_category == 0 %}
-            <li class="selected_category">All Categories</li>
-            {% else %}
-            <li><a href="{% url 'home' %}">All Categories</a></li>
-            {% endif%}
 
-            {% show_categories selected_category=selected_category%}
+    <!--            {% get_categories filter=1 as categories %}-->
+    <!--            {% get_categories as categories %}-->
 
-        </ul>
-    </aside>
+    {% show_categories selected_category=selected_category%}
+
 
     <!-- Main Content -->
     <main class="content">
@@ -26,7 +17,7 @@
             {% for ev in events %}
             <li class="events_li">
                 {% if ev.image%}
-                <img src="{{ ev.image.url }}" alt="{{ ev.name }}" >
+                <img src="{{ ev.image.url }}" alt="{{ ev.name }}">
                 {% endif %}
                 <h2>{{ ev.name }}</h2>
                 <p><strong>Author ID:</strong> {{ ev.authorId }}</p>

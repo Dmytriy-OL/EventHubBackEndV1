@@ -1,0 +1,16 @@
+{% load static %}
+{% load event_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
+
+    <link type="text/css" href="{% static 'event/css/event_page.css' %}" rel="stylesheet">
+</head>
+<body>
+{% show_menu %}
+{% show_categories selected_category=selected_category %}
+</body>
+</html>

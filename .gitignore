@@ -1,0 +1,29 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtualenv
+venv/
+env/
+
+# Django
+*.env
+#db.sqlite3
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# Node.js (якщо є фронтенд)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+#.gitignore
+
+#*.html
+*.png

@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import *
 
@@ -50,7 +50,14 @@ def feedback(request):
 
 
 def show_event(request, event_id):
-    return HttpResponse(f"Event which id is {event_id}")
+    event = get_object_or_404(Event, pk=event_id)
+    # print(event)
+    context = {
+        'event': event,
+        'title': event.name,
+        'selected_category': event.category_id
+    }
+    return render(request, 'event/event_page.html', context=context)
 
 
 # def eventss(request):

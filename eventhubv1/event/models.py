@@ -4,11 +4,12 @@ from django.urls import reverse
 
 class Event(models.Model):
     name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="Url")
     authorId = models.CharField(max_length=50)
     data = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True)
+    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=False)
     description = models.TextField(blank=True, null=True)
-    category = models.ForeignKey('EventCategory', on_delete=models.PROTECT, null=True)
+    category = models.ForeignKey('EventCategory', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -24,6 +25,7 @@ class Event(models.Model):
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=50, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="Url")
 
     def __str__(self):
         return self.name

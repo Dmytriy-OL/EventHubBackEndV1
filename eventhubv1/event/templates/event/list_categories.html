@@ -1,9 +1,19 @@
-{% for cat in categories %}
+<!-- Sidebar Menu -->
+<aside class="sidebar">
 
-{% if selected_category == cat.pk %}
-<li class="selected_category">{{cat}}</li>
-{% else %}
-<li><a href="{{ cat.get_absolute_url }}">{{cat}}</a></li>
-{% endif %}
+    <ul>
+        {% if selected_category == 0 %}
+        <li class="selected_category">All Categories</li>
+        {% else %}
+        <li><a href="{% url 'home' %}">All Categories</a></li>
+        {% endif%}
+        {% for cat in categories %}
+        {% if selected_category == cat.pk %}
+        <li class="selected_category">{{cat}}</li>
+        {% else %}
+        <li><a href="{{ cat.get_absolute_url }}">{{cat}}</a></li>
+        {% endif %}
 
-{%endfor%}
+        {%endfor%}
+    </ul>
+</aside>
