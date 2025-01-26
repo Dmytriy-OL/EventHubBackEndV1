@@ -15,7 +15,7 @@ class Event(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('show_event', kwargs={'event_id': self.pk})
+        return reverse('show_event', kwargs={'event_slug': self.slug})
 
     class Meta:
         verbose_name = 'Event'

@@ -49,9 +49,9 @@ def feedback(request):
     return HttpResponse("<h1>Feedback</h1>")
 
 
-def show_event(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
-    # print(event)
+def show_event(request, event_slug):
+    event = get_object_or_404(Event, slug=event_slug)
+    print(event)
     context = {
         'event': event,
         'title': event.name,

@@ -1,4 +1,68 @@
 .sidebar{
-    height: 100vh; /* Висота на всю видиму частину екрана */
-    position: fixed; /* Фіксоване положення на екрані */
+    height: 100vh;
+}
+
+.event_detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #f9fafb;
+    padding: 2rem;
+    width: 75%;
+    /*border: 1px solid #e5e7eb;*/
+    /*border-radius: 1rem;*/
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*.event_detail:hover {*/
+/*    transform: translateY(-4px);*/
+/*    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);*/
+/*}*/
+
+.event_detail img {
+    border-radius: 0.75rem;
+    width: 12rem;
+    height: 12rem;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.event_detail img:hover {
+    transform: scale(1.05);
+}
+
+.event_detail h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.event_detail p {
+    font-size: 0.95rem;
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.event_detail p strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.button_read_more {
+    display: inline-block;
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button_read_more:hover {
+    background-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
 }
