@@ -22,8 +22,8 @@
 
 .event_detail img {
     border-radius: 0.75rem;
-    width: 12rem;
-    height: 12rem;
+    max-width: 100%;
+    max-height: 18rem;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;

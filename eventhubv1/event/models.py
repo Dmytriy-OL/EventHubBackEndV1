@@ -5,7 +5,7 @@ from django.urls import reverse
 class Event(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="Url")
-    authorId = models.CharField(max_length=50)
+    authorId = models.CharField(max_length=50, default="id1111")
     data = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='images/%Y/%m/%d', blank=False)
     description = models.TextField(blank=True, null=True)
@@ -31,7 +31,7 @@ class EventCategory(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('show_category', kwargs={'category_id': self.pk})
+        return reverse('show_category', kwargs={'category_slug': self.slug})
 
     class Meta:
         verbose_name = 'Category'

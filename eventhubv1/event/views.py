@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.views import View
 
 from .models import *
 
@@ -16,11 +17,12 @@ def index(request):
     return render(request, 'event/index.html', context=context)
 
 
-def show_category(request, category_id):
-    events = Event.objects.filter(category_id=category_id)
+def show_category(request, category_slug):
+    events = get_list_or_404(Event, category__slug=category_slug)
 
-    if len(events) == 0:
-        raise Http404
+    for event in events:
+        category_id = event.category.id
+        break
 
     context = {
         'events': events,
@@ -51,7 +53,7 @@ def feedback(request):
 
 def show_event(request, event_slug):
     event = get_object_or_404(Event, slug=event_slug)
-    print(event)
+
     context = {
         'event': event,
         'title': event.name,
