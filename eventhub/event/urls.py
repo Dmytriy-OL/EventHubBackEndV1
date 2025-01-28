@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import *
 
@@ -10,5 +10,5 @@ urlpatterns = [
     path('add_new_event/', add_new_event, name='add_new_event'),
     path('event/<slug:event_slug>/', show_event, name='show_event'),
     path('category/<slug:category_slug>/', show_category, name='show_category'),
-    # path('events/', eventss),
+    path('', include('event.api_urls')),
 ]
