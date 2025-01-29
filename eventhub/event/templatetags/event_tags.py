@@ -17,7 +17,7 @@ def get_categories(filter=None):
         return Category.objects.filter(pk=filter)
 
 
-@register.inclusion_tag('event/list_categories.html')
+@register.inclusion_tag('event/partials/category/list_categories.html')
 def show_categories(sort=None, selected_category=None):
     if not sort:
         categories = Category.objects.all()
@@ -27,6 +27,6 @@ def show_categories(sort=None, selected_category=None):
     return {'categories': categories, 'selected_category': selected_category}
 
 
-@register.inclusion_tag('event/menu_list.html')
+@register.inclusion_tag('event/partials/menu_list.html')
 def show_menu():
     return {'menu': menu, }

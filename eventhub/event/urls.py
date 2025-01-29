@@ -10,5 +10,5 @@ urlpatterns = [
     path('add_new_event/', add_new_event, name='add_new_event'),
     path('event/<slug:event_slug>/', show_event, name='show_event'),
     path('category/<slug:category_slug>/', show_category, name='show_category'),
-    path('', include('event.api_urls')),
+    # path('', include('event.api.api_urls')),
 ]

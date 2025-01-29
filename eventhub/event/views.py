@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.views import View
 
+from .forms import *
 from .models import *
 
 
@@ -44,7 +45,18 @@ def personal_page(request):
 
 
 def add_new_event(request):
-    return HttpResponse("<h1>Add new Event</h1>")
+    if request.method == "POST":
+        form = AddEventForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('home')
+            except:
+                form.add_error(None, "Error adding event")
+    else:
+        form = AddEventForm()
+    return render(request, 'event/addpage.html', context={'title': 'Add New Event', 'form': form})
+
 
 
 def feedback(request):
