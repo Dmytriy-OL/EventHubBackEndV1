@@ -46,7 +46,7 @@ def personal_page(request):
 
 def add_new_event(request):
     if request.method == "POST":
-        form = AddEventForm(request.POST, request.FILES)
+        form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 form.save()
@@ -54,9 +54,21 @@ def add_new_event(request):
             except:
                 form.add_error(None, "Error adding event")
     else:
-        form = AddEventForm()
+        form = EventForm()
     return render(request, 'event/addpage.html', context={'title': 'Add New Event', 'form': form})
 
+
+def edit_event(request, event_slug):
+    event = get_object_or_404(Event, slug=event_slug)
+    if request.method == "POST":
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('show_event', kwargs={'event_slug': event.slug}))
+    else:
+        form = EventForm(instance=event)
+
+    return render(request, 'event/edit_page.html', {'event_slug': event_slug ,'form': form, 'title': 'Edit Event'})
 
 
 def feedback(request):

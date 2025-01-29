@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class AddEventForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['name', 'description', 'image', 'category']
@@ -13,3 +13,4 @@ class AddEventForm(forms.ModelForm):
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-select'}),
         }
+

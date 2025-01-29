@@ -16,7 +16,7 @@ class Event(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.slug or Event.objects.filter(pk=self.pk, name=self.name).exists() == False:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
@@ -48,5 +48,3 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         # ordering = ['-name']
-
-
