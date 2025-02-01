@@ -5,7 +5,7 @@ from .models import *
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'image', 'category']
+        fields = ['name', 'authorId', 'description', 'image', 'category']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter event name'}),
             'description': forms.Textarea(

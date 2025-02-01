@@ -66,3 +66,43 @@
     background-color: #2563eb;
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
 }
+
+/* Оформлення кнопок */
+.btn-group {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+/* Кнопка редагування */
+.btn-primary {
+    background: #007bff;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+/* Кнопка видалення */
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #a71d2a;
+}

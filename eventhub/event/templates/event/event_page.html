@@ -17,9 +17,9 @@
 
     <div class="event_detail">
         {% if event.image %}
-            <div>
-                <img src="{{ event.image.url }}" alt="{{ event.name }}">
-            </div>
+        <div>
+            <img src="{{ event.image.url }}" alt="{{ event.name }}">
+        </div>
         {% endif %}
         <div>
             <h2>{{ event.name }}</h2>
@@ -27,7 +27,15 @@
             <p><strong>Date:</strong> {{ event.data }}</p>
             <p><strong>Description:</strong> {{ event.description|linebreaks }}</p>
             <p><strong>Category:</strong> {{ event.category }}</p>
+
+            <!-- Кнопки редагування та видалення -->
+            <div class="btn-group">
+                <a href="{{ event.get_edit_url }}" class="btn btn-primary">Редагувати</a>
+                <a href="#" class="btn btn-danger">Видалити</a>
+            </div>
         </div>
+
+
     </div>
 
 </div>

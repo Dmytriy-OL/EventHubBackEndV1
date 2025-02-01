@@ -2,12 +2,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from eventhub import settings
+
 from event.views import *
+from eventhub import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('event.urls')),
+    path('', include('user.urls')),
 ]
 
 if settings.DEBUG:
