@@ -1,0 +1,33 @@
+{% load static %}
+{% load event_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{{ title }}</title>
+
+    {% get_categories as categories%}
+
+    <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'user/css/personal_page.css' %}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% show_menu %}
+
+
+<div class="user-profile">
+    <div class="user-card">
+        <img class="avatar" src="{% static 'user/images/no-avatar.jpg' %}" alt="User Avatar">
+        <div class="nickname">@nickname</div>
+        <div class="name">Ім'я</div>
+        <div class="surname">Прізвище</div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
