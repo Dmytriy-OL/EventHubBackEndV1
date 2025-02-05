@@ -15,12 +15,12 @@ class Author(models.Model):
     def __str__(self):
         return self.nickname
 
-    def clean(self):
-        super().clean()
-        if self.banner:
-            img = Image.open(self.banner)
-            if img.width != 1200 or img.height != 400:
-                raise ValidationError("Зображення має бути розміром 1200x400 пікселів.")
+    # def clean(self):
+    #     super().clean()
+    #     if self.banner:
+    #         img = Image.open(self.banner)
+    #         if img.width != 1200 or img.height != 400:
+    #             raise ValidationError("Зображення має бути розміром 1200x400 пікселів.")
 
     def save(self, *args, **kwargs):
         if not self.slug or Author.objects.filter(pk=self.pk, name=self.nickname).exists() == False:

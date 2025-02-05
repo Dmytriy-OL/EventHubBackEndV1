@@ -7,7 +7,7 @@
 
     <title>{{ title }}</title>
 
-    {% get_categories as categories%}
+    {% get_categories as categories %}
 
     <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
     <link type="text/css" href="{% static 'user/css/personal_page.css' %}" rel="stylesheet">
@@ -20,13 +20,37 @@
 
 <div class="user-profile">
     <div class="user-card">
-        <img class="avatar" src="{% static 'user/images/no-avatar.jpg' %}" alt="User Avatar">
-        <div class="nickname">@nickname</div>
-        <div class="name">Ім'я</div>
-        <div class="surname">Прізвище</div>
+        {% if not user.avatar %}
+            <img class="avatar" src="{% static 'user/images/no-avatar.jpg' %}" alt="User Avatar">
+        {% else %}
+            <img class="avatar" src="{{ user.avatar.url }}" alt="{{ user.nickname }}">
+        {% endif %}
+        <div class="nickname">@{{ user.nickname }}</div>
+        <div class="name">{{ user.name }}</div>
+        <div class="surname">{{ user.surname }}</div>
     </div>
 </div>
 
+{% get_events filter=user.slug as events %}
+
+<main class="context">
+    <ul>
+    {% for ev in events %}
+        <li class="events_li">
+            {% if ev.image %}
+                <img class="personal_page_event_images" src="{{ ev.image.url }}" alt="{{ ev.name }}">
+            {% endif %}
+            <h2>{{ ev.name }}</h2>
+            <p><strong>Date:</strong> {{ ev.data }}</p>
+            <p><strong>Description:</strong> {{ ev.description|truncatechars:20 }}</p>
+            <p><strong>Category:</strong> {{ ev.category }}</p>
+            <a href="{{ ev.get_absolute_url }}">
+                <div class="button_read_more">Read more</div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+</main>
 
 
 </body>

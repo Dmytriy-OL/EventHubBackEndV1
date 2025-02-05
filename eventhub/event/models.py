@@ -27,6 +27,9 @@ class Event(models.Model):
     def get_edit_url(self):
         return reverse("edit_event", kwargs={'event_slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse("delete_event", kwargs={'event_slug': self.slug})
+
     class Meta:
         verbose_name = 'Event'
         verbose_name_plural = 'All Events'

@@ -11,12 +11,12 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 300px;
+    width: 500px;
 }
 
 .user-card .avatar {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #3498db;
@@ -38,4 +38,15 @@
 .user-card .surname {
     font-size: 20px;
     color: #555;
+}
+
+.personal_page_event_images {
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.personal_page_event_images:hover {
+    transform: scale(1.05);
 }

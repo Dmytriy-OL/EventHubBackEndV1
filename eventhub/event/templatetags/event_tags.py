@@ -5,7 +5,7 @@ register = template.Library()
 
 menu = [{'name': 'Add new Event', 'url_name': 'add_new_event'},
         {'name': 'Feedback', 'url_name': 'feedback'},
-        {'name': 'Personal Page', 'url_name': 'personal_page'},
+        # {'name': 'Personal Page', 'url_name': 'personal_page'},
         {'name': 'About Page', 'url_name': 'about'}]
 
 
@@ -15,6 +15,14 @@ def get_categories(filter=None):
         return Category.objects.all()
     else:
         return Category.objects.filter(pk=filter)
+
+
+@register.simple_tag
+def get_events(filter=None):
+    if not filter:
+        return Event.objects.all()
+    else:
+        return Event.objects.filter(authorId__slug=filter)
 
 
 @register.inclusion_tag('event/partials/category/list_categories.html')
