@@ -3,6 +3,10 @@ from .models import *
 
 
 class EventForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].empty_label = 'Category not selected'
+
     class Meta:
         model = Event
         fields = ['name', 'authorId', 'description', 'image', 'category']
