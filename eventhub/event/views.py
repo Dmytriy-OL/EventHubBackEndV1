@@ -1,36 +1,41 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
-from django.views import View
+from django.views.generic import ListView
 
 from .forms import *
 from .models import *
 
 
-def index(request):
-    events = Event.objects.all()
+class EventHomeView(ListView):
+    model = Event
+    template_name = 'event/index.html'
+    context_object_name = 'events'
 
-    context = {
-        'events': events,
-        'title': 'EventHub Main Page',
-        'selected_category': 0
+    # extra_context = {'title': 'EventHub Main Page', 'selected_category': 0}
 
-    }
-    return render(request, 'event/index.html', context=context)
+    def get_context_data(self, **kwargs, ):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'EventHub Main Page'
+        context['selected_category'] = 0
+        return context
 
 
-def show_category(request, category_slug):
-    events = get_list_or_404(Event, category__slug=category_slug)
+class EventHomeCategoryView(ListView):
+    model = Event
+    template_name = 'event/index.html'
+    context_object_name = 'events'
 
-    for event in events:
-        category_id = event.category.id
-        break
+    def get_context_data(self, **kwargs, ):
+        context = super().get_context_data(**kwargs)
+        context['selected_category'] = context['events'][0].category_id
+        return context
 
-    context = {
-        'events': events,
-        'selected_category': category_id
-    }
-
-    return render(request, 'event/index.html', context=context)
+    def get_queryset(self):
+        events = Event.objects.filter(category__slug=self.kwargs['category_slug'])
+        if events.exists():
+            return events
+        else:
+            raise Http404
 
 
 def about(request):
@@ -38,10 +43,6 @@ def about(request):
         'title': 'EventHub About Page'
     }
     return render(request, 'event/about.html', context=context)
-
-
-def personal_page(request):
-    return HttpResponse("<h1>Personal Page</h1>")
 
 
 def add_new_event(request):
@@ -68,7 +69,7 @@ def edit_event(request, event_slug):
     else:
         form = EventForm(instance=event)
 
-    return render(request, 'event/edit_page.html', {'event_slug': event_slug ,'form': form, 'title': 'Edit Event'})
+    return render(request, 'event/edit_page.html', {'event_slug': event_slug, 'form': form, 'title': 'Edit Event'})
 
 
 def feedback(request):
@@ -86,18 +87,10 @@ def show_event(request, event_slug):
     return render(request, 'event/event_page.html', context=context)
 
 
-# def eventss(request):
-#     return HttpResponse("<h1>event 1</h1><h1>event 2</h1>")
-#
-#
-# def event(request, event_id):
-#     # if (request.GET):
-#     #     print(request.GET)
-#     if (int(event_id) > 10):
-#         # raise Http404()
-#         return redirect('home', permanent=True)
-#
-#     return HttpResponse(f"<h1>event - </h1>{event_id}")
+def delete_event(request, event_slug):
+    event = get_object_or_404(Event, slug=event_slug)
+    event.delete()
+    return redirect('home')
 
 
 def pageNotFound(request, exception):
