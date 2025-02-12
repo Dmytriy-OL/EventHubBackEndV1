@@ -18,3 +18,8 @@ class EventForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'form-select'}),
         }
 
+    # def clean_name(self):
+    #     name = self.cleaned_data['name']
+    #     if len(name) > 49:
+    #         raise forms.ValidationError('Event name too long')
+    #     return name

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
 
 from .forms import *
 from .models import *
@@ -24,6 +25,7 @@ class EventHomeCategoryView(ListView):
     model = Event
     template_name = 'event/index.html'
     context_object_name = 'events'
+    allow_empty = False
 
     def get_context_data(self, **kwargs, ):
         context = super().get_context_data(**kwargs)
@@ -32,10 +34,7 @@ class EventHomeCategoryView(ListView):
 
     def get_queryset(self):
         events = Event.objects.filter(category__slug=self.kwargs['category_slug'])
-        if events.exists():
-            return events
-        else:
-            raise Http404
+        return events
 
 
 def about(request):
@@ -45,46 +44,32 @@ def about(request):
     return render(request, 'event/about.html', context=context)
 
 
-def add_new_event(request):
-    if request.method == "POST":
-        form = EventForm(request.POST, request.FILES)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('home')
-            except:
-                form.add_error(None, "Error adding event")
-    else:
-        form = EventForm()
-    return render(request, 'event/addpage.html', context={'title': 'Add New Event', 'form': form})
+class AddEventView(CreateView):
+    form_class = EventForm
+    template_name = 'event/add_page.html'
+    extra_context = {'title': 'Add Event'}
 
 
-def edit_event(request, event_slug):
-    event = get_object_or_404(Event, slug=event_slug)
-    if request.method == "POST":
-        form = EventForm(request.POST, request.FILES, instance=event)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('show_event', kwargs={'event_slug': event.slug}))
-    else:
-        form = EventForm(instance=event)
+class EditEventView(UpdateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'event/edit_page.html'
+    slug_field = 'slug'
+    slug_url_kwarg = 'event_slug'
 
-    return render(request, 'event/edit_page.html', {'event_slug': event_slug, 'form': form, 'title': 'Edit Event'})
+    def get_success_url(self):
+        return reverse_lazy('show_event', kwargs={'event_slug': self.object.slug})
 
 
 def feedback(request):
     return HttpResponse("<h1>Feedback</h1>")
 
 
-def show_event(request, event_slug):
-    event = get_object_or_404(Event, slug=event_slug)
-
-    context = {
-        'event': event,
-        'title': event.name,
-        'selected_category': event.category_id
-    }
-    return render(request, 'event/event_page.html', context=context)
+class ShowEventView(DetailView):
+    model = Event
+    template_name = 'event/event_page.html'
+    slug_url_kwarg = 'event_slug'
+    # extra_context = {'title': 'EventHub Main Page', 'selected_category': 0}
 
 
 def delete_event(request, event_slug):
