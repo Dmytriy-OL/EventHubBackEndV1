@@ -1,0 +1,44 @@
+{% load static %}
+{% load event_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
+
+    <link type="text/css" href="{% static 'event/css/event_page.css' %}" rel="stylesheet">
+</head>
+<body>
+{% show_menu %}
+
+<div class="container">
+    {% show_categories selected_category=selected_category %}
+
+    <div class="event_detail">
+        {% if event.image %}
+        <div>
+            <img src="{{ event.image.url }}" alt="{{ event.name }}">
+        </div>
+        {% endif %}
+        <div>
+            <h2>{{ event.name }}</h2>
+            <p><strong>Author:</strong> {{ event.authorId }}</p>
+            <p><strong>Date:</strong> {{ event.data }}</p>
+            <p><strong>Description:</strong> {{ event.description|linebreaks }}</p>
+            <p><strong>Category:</strong> {{ event.category }}</p>
+
+            <!-- Кнопки редагування та видалення -->
+            <div class="btn-group">
+                <a href="{{ event.get_edit_url }}" class="btn btn-primary">Edit</a>
+                <a href="{{ event.get_delete_url }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

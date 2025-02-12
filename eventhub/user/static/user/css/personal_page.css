@@ -1,0 +1,52 @@
+.user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.user-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 500px;
+}
+
+.user-card .avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3498db;
+    margin-bottom: 15px;
+}
+
+.user-card .nickname {
+    font-size: 18px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.user-card .name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-card .surname {
+    font-size: 20px;
+    color: #555;
+}
+
+.personal_page_event_images {
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.personal_page_event_images:hover {
+    transform: scale(1.05);
+}
