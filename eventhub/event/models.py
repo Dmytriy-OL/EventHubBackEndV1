@@ -1,15 +1,16 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from pytils.translit import translify
+
+from eventhub.utils import convert_name_to_url
 
 
 class Event(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="Url", blank=True)
-    authorId = models.ForeignKey('user.Author', on_delete=models.CASCADE)
+    author = models.ForeignKey('user.Author', on_delete=models.CASCADE)
     data = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=False)
+    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
 
@@ -18,7 +19,7 @@ class Event(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug or Event.objects.filter(pk=self.pk, name=self.name).exists() == False:
-            self.slug = slugify(translify(self.name))  # Транслітерація + slugify
+            self.slug = slugify(convert_name_to_url(self.name))
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -55,5 +56,3 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         # ordering = ['-name']
-
-
