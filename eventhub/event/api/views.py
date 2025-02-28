@@ -62,6 +62,8 @@ class CategoryDetailAPIView(APIView):
 
 
 class CategoryCreateAPIView(APIView):
+    parser_classes = [MultiPartParser, FormParser]
+
     @swagger_auto_schema(
         request_body=CategorySerializer,
     )
