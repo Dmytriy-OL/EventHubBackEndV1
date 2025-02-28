@@ -20,7 +20,7 @@
                 <img src="{{ ev.image.url }}" alt="{{ ev.name }}">
                 {% endif %}
                 <h2>{{ ev.name }}</h2>
-                <p><strong>Author:</strong> {{ ev.authorId }}</p>
+                <p><strong>Author:</strong> {{ ev.author }}</p>
                 <p><strong>Date:</strong> {{ ev.data }}</p>
                 <p><strong>Description:</strong> {{ ev.description|truncatechars:20 }}</p>
                 <p><strong>Category:</strong> {{ ev.category }}</p>

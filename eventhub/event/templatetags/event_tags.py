@@ -22,7 +22,7 @@ def get_events(filter=None):
     if not filter:
         return Event.objects.all()
     else:
-        return Event.objects.filter(authorId__slug=filter)
+        return Event.objects.filter(author__slug=filter)
 
 
 @register.inclusion_tag('event/partials/category/list_categories.html')
