@@ -5,17 +5,18 @@
 <head>
     <meta charset="UTF-8">
     {% if title %}
-    <title>{{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
-    {% get_categories as categories%}
+        {% get_categories as categories %}
 
-    {% for category in categories%}
-        {% if forloop.counter == selected_category%}
+        {% for category in categories %}
+            {% if forloop.counter == selected_category %}
                 <title>{{ category.name }}</title>
-        {% endif %}
-    {% endfor %}
-    {% endif%}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <link type="text/css" href="{% static 'event/css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -26,6 +27,25 @@
 <!--Content Block-->
 {% block content %}
 {% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+<script>
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            palette: {
+                popup: {background: "#222"},
+                button: {background: "#f1d600"}
+            },
+            theme: "classic",
+            content: {
+                message: "Цей сайт використовує файли cookie для покращення роботи.",
+                dismiss: "Зрозуміло!",
+                link: "Дізнатися більше",
+                href: "/privacy-policy"
+            }
+        })
+    });
+</script>
 
 </body>
 </html>

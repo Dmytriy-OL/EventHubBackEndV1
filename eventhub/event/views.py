@@ -80,3 +80,6 @@ def delete_event(request, event_slug):
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Page Not Found</h1><h2>Please try again</h2>")
+
+def privacy_policy(request):
+    return render(request, "event/privacy-policy.html")

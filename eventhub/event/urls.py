@@ -11,4 +11,5 @@ urlpatterns = [
     path('event/<slug:event_slug>/', ShowEventView.as_view(), name='show_event'),
     path('delete/<slug:event_slug>/', delete_event, name='delete_event'),
     path('category/<slug:category_slug>/', EventHomeCategoryView.as_view(), name='show_category'),
+    path('privacy-policy/', privacy_policy , name='privacy_policy'),
 ]
