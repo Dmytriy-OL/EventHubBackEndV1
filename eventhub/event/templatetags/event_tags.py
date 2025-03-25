@@ -38,3 +38,8 @@ def show_categories(sort=None, selected_category=None):
 @register.inclusion_tag('event/partials/menu_list.html')
 def show_menu():
     return {'menu': menu, }
+
+
+@register.inclusion_tag('event/partials/cookiepopup.html')
+def show_cookiepopup():
+    return {}

@@ -22,30 +22,12 @@
 <body>
 
 {% show_menu %}
-
+{% show_cookiepopup %}
 
 <!--Content Block-->
 {% block content %}
 {% endblock %}
 
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
-<script>
-    window.addEventListener("load", function () {
-        window.cookieconsent.initialise({
-            palette: {
-                popup: {background: "#222"},
-                button: {background: "#f1d600"}
-            },
-            theme: "classic",
-            content: {
-                message: "Цей сайт використовує файли cookie для покращення роботи.",
-                dismiss: "Зрозуміло!",
-                link: "Дізнатися більше",
-                href: "/privacy-policy"
-            }
-        })
-    });
-</script>
 
 </body>
 </html>
