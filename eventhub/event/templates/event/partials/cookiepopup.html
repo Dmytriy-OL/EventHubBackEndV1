@@ -1,20 +1,46 @@
 {#Cookie#}
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
 <script>
     window.addEventListener("load", function () {
         window.cookieconsent.initialise({
             palette: {
-                popup: {background: "#222"},
-                button: {background: "#f1d600"}
+                popup: { background: "#222" },
+                button: { background: "#4caf50" }
             },
             theme: "classic",
+            type: "opt-in",
             content: {
-                message: "Цей сайт використовує файли cookie для покращення роботи.",
-                dismiss: "Зрозуміло!",
+                message: "Цей сайт використовує файли cookie для покращення роботи. Оберіть свій рівень згоди.",
+                dismiss: "Відхилити",
+                allow: "Прийняти всі",
+                deny: "Тільки необхідні",
                 link: "Дізнатися більше",
                 href: "/privacy-policy"
+            },
+            onInitialise: function (status) {
+                if (status === cookieconsent.status.allow) {
+                    enableCookies();
+                }
+            },
+            onStatusChange: function (status) {
+                if (status === cookieconsent.status.allow) {
+                    enableCookies();
+                } else {
+                    disableCookies();
+                }
             }
-        })
+        });
+
+        function enableCookies() {
+            console.log("Користувач прийняв усі куки.");
+        }
+
+        function disableCookies() {
+            console.log("Користувач дозволив тільки необхідні куки.");
+            window['ga-disable-UA-XXXXX-Y'] = true;
+        }
     });
 </script>
