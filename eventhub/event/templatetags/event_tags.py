@@ -22,7 +22,7 @@ def get_events(filter=None):
     if not filter:
         return Event.objects.all()
     else:
-        return Event.objects.filter(authorId__slug=filter)
+        return Event.objects.filter(author__slug=filter)
 
 
 @register.inclusion_tag('event/partials/category/list_categories.html')
@@ -38,3 +38,8 @@ def show_categories(sort=None, selected_category=None):
 @register.inclusion_tag('event/partials/menu_list.html')
 def show_menu():
     return {'menu': menu, }
+
+
+@register.inclusion_tag('event/partials/cookiepopup.html')
+def show_cookiepopup():
+    return {}

@@ -1,0 +1,33 @@
+{
+  "name": "eventhub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "django-storybook": "start-storybook -p 6006",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoowalex/EventHubBackEndV1.git"
+  },
+  "author": "Oleksii Rudenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hoowalex/EventHubBackEndV1/issues"
+  },
+  "homepage": "https://github.com/hoowalex/EventHubBackEndV1#readme",
+  "description": "",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.6",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/addon-interactions": "^8.6.11",
+    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/blocks": "^8.6.11",
+    "@storybook/html": "^8.6.11",
+    "@storybook/html-webpack5": "^8.6.11",
+    "@storybook/test": "^8.6.11",
+    "storybook": "^8.6.11"
+  }
+}

@@ -4,7 +4,7 @@ from .models import *
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug', 'authorId', 'image', 'data', 'category')
+    list_display = ('id', 'name', 'slug', 'author', 'image', 'data', 'category')
     list_display_links = ('id', 'name')
     search_fields = ('name', 'category')
     list_editable = ('category',)
