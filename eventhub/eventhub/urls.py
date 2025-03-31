@@ -4,20 +4,21 @@ from django.urls import path, include
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
-from rest_framework.permissions import AllowAny
+from rest_framework import permissions
 
 from event.views import *
 from eventhub import settings
-
 
 schema_view = swagger_get_schema_view(
     openapi.Info(
         title="API документація",
         default_version="v1",
         description="Опис API викликів",
+        terms_of_service="https://www.example.com/terms/",
+        contact=openapi.Contact(email="hoowhoower@gmail.com"),
     ),
     public=True,
-    permission_classes=(AllowAny,),
+    permission_classes=[permissions.AllowAny],
 )
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
         path('events/', include(('event.api.urls', 'event'), namespace='events')),
         path('users/', include(('user.api.urls', 'user'), namespace='users')),
         path('swagger/schema/', schema_view.with_ui('swagger'), name='schema-swagger'),
+        path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     ])),
 ]
 
