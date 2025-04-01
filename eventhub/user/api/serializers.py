@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from event.models import Event
+from user.models import Author
 
-class AutorSerializer(serializers.ModelSerializer):
+
+class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Event
+        model = Author
         fields = '__all__'
